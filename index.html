@@ -137,18 +137,18 @@
                                class="w-full bg-gray-100 dark:bg-gray-800 border border-gray-600 dark:border-gray-400 rounded-sm py-2 pl-2 pr-12 mt-1"
                                required placeholder="Enter todo title">
                         <div class="absolute right-2 top-11.5 text-xs text-gray-400 dark:text-gray-500">
-                            <span>0</span>
+                            <span id="titleLength">0</span>
                             / 30
                         </div>
                     </div>
 
                     <div class="relative mt-3">
                         <label for="newTodoDescription" class="text-lg">description</label>
-                        <textarea type="text" maxlength="10" rows="3" id="newTodoDescription"
-                                  class="w-full bg-gray-100 dark:bg-gray-800 border border-gray-600 dark:border-gray-400 rounded-sm pt-2 pb-8 px-2 mt-1"
+                        <textarea type="text" maxlength="120" rows="3" id="newTodoDescription"
+                                  class="w-full bg-gray-100 dark:bg-gray-800 border border-gray-600 dark:border-gray-400 rounded-sm pt-2 !pb-10 px-2 mt-1"
                                   required placeholder="Add description (optional)"></textarea>
                         <div class="absolute right-3 bottom-4 text-xs text-gray-400 dark:text-gray-500">
-                            <span>0</span>
+                            <span id="descriptionLength">0</span>
                             / 120
                         </div>
                     </div>
@@ -181,27 +181,25 @@
                     <!--difficulty-->
                     <div class="flex items-center gap-x-3 mt-4">
                         <h3 class="text-lg pb-2">difficulty:</h3>
-                        <div id="newTodoStars" class="flex gap-x-0.5 cursor-pointer pb-2">
-                            <svg data-score="1" class="size-6 text-amber-500">
+                        <div class="flex gap-x-0.5 cursor-pointer pb-2">
+                            <svg data-score="1" class="newTodoStars size-6 text-amber-500">
                                 <use href="#star"></use>
                             </svg>
-                            <svg data-score="2" class="size-6">
+                            <svg data-score="2" class="newTodoStars size-6">
                                 <use href="#star"></use>
                             </svg>
-                            <svg data-score="3" class="size-6">
+                            <svg data-score="3" class="newTodoStars size-6">
                                 <use href="#star"></use>
                             </svg>
-                            <svg data-score="4" class="size-6">
+                            <svg data-score="4" class="newTodoStars size-6">
                                 <use href="#star"></use>
                             </svg>
-                            <svg data-score="5" class="size-6">
+                            <svg data-score="5" class="newTodoStars size-6">
                                 <use href="#star"></use>
                             </svg>
                         </div>
                     </div>
                 </form>
-
-
             </div>
         </section>
 
@@ -250,19 +248,19 @@
                 <div class="flex items-center justify-between">
                     <div class="flex-1">
                         <div class="flex items-center justify-start gap-x-0.5 cursor-pointer text-gray-800 dark:text-gray-300">
-                            <svg data-score="1" class="size-4 text-amber-500">
+                            <svg class="size-4 text-amber-500">
                                 <use href="#star"></use>
                             </svg>
-                            <svg data-score="2" class="size-4">
+                            <svg class="size-4">
                                 <use href="#star"></use>
                             </svg>
-                            <svg data-score="3" class="size-4">
+                            <svg class="size-4">
                                 <use href="#star"></use>
                             </svg>
-                            <svg data-score="4" class="size-4">
+                            <svg class="size-4">
                                 <use href="#star"></use>
                             </svg>
-                            <svg data-score="5" class="size-4">
+                            <svg class="size-4">
                                 <use href="#star"></use>
                             </svg>
                         </div>
@@ -289,8 +287,7 @@
                         <label for="todo-1" class="todo-completed-checkbox"></label>
                     </div>
 
-                    <h3 class="flex-1 text-gray-800 dark:text-gray-100 text-sm lg:text-lg line-clamp-1">learning reactjs
-                        and project and testing and and and and and
+                    <h3 class="flex-1 text-gray-800 dark:text-gray-100 text-sm lg:text-lg line-clamp-1">learn js and react and nextjs
                     </h3>
                     <button class="h-10 flex-center text-lg bg-emerald-500 hover:bg-emerald-400 text-gray-800 rounded-md cursor-pointer px-4">
                         start

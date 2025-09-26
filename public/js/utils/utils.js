@@ -26,7 +26,20 @@ const toggleNewTodoContainer = () => {
 
 }
 
+const colorStars = (stars, range) => {
+    stars.forEach((star) => {
+        star.classList.remove('text-amber-500');
+    });
+
+    stars.forEach((star) => {
+        if (+star.dataset.score <= range) {
+            star.classList.add('text-amber-500');
+        }
+    })
+}
+
 export {
     toggleNewTodoContainer,
-    newTodoContainerBtn
+    newTodoContainerBtn,
+    colorStars
 }
