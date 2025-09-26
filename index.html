@@ -243,195 +243,79 @@
 
         <!--todos-->
         <section class="space-y-4 my-4">
-            <div class="relative w-full p-4 pt-10 bg-white dark:bg-gray-800 rounded-lg my-shadow">
+            <div class="relative w-full px-4 pb-4 pt-2 bg-white dark:bg-gray-800 rounded-lg my-shadow">
+                <!--difficulty & edit & delete-->
+                <div class="flex items-center justify-between">
+                    <div class="flex-1">
+                        <div class="flex items-center justify-start gap-x-0.5 cursor-pointer text-gray-800 dark:text-gray-300">
+                            <svg data-score="1" class="size-4 text-amber-500">
+                                <use href="#star"></use>
+                            </svg>
+                            <svg data-score="2" class="size-4">
+                                <use href="#star"></use>
+                            </svg>
+                            <svg data-score="3" class="size-4">
+                                <use href="#star"></use>
+                            </svg>
+                            <svg data-score="4" class="size-4">
+                                <use href="#star"></use>
+                            </svg>
+                            <svg data-score="5" class="size-4">
+                                <use href="#star"></use>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="flex-1">
+                        <span class="flex items-start justify-center text-gray-500 dark:text-gray-500">00:00:00</span>
+                    </div>
+                    <div class="flex-1">
+                        <div class="flex items-center justify-end gap-x-2 text-gray-800 dark:text-gray-500">
+                            <svg class="size-5 cursor-pointer hover:text-gray-700 dark:hover:text-emerald-500">
+                                <use href="#trash"></use>
+                            </svg>
+                            <svg class="size-5 cursor-pointer hover:text-gray-700 dark:hover:text-emerald-500">
+                                <use href="#edit"></use>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <!--title-->
                 <div class="flex items-center gap-x-3 my-4">
                     <div class="">
                         <input id="todo-1" type="checkbox" class="hidden peer todo-checkbox-input">
                         <label for="todo-1" class="todo-completed-checkbox"></label>
                     </div>
 
-                    <h3 class="flex-1 text-gray-800 dark:text-gray-100 text-sm lg:text-lg line-clamp-2">learning reactjs
+                    <h3 class="flex-1 text-gray-800 dark:text-gray-100 text-sm lg:text-lg line-clamp-1">learning reactjs
                         and project and testing and and and and and
                     </h3>
                     <button class="h-10 flex-center text-lg bg-emerald-500 hover:bg-emerald-400 text-gray-800 rounded-md cursor-pointer px-4">
                         start
                     </button>
                 </div>
-                <div class="text-gray-800 dark:text-gray-100 transition-[max-height] duration-300 overflow-hidden" style="max-height: 24px">
-                    <button aria-expanded="false" class="descriptionBtn flex items-center gap-x-2 cursor-pointer">
-                        <svg class="size-4 transition duration-300">
-                            <use href="#chevron-down"></use>
-                        </svg>
-                        description
-                    </button>
-                    <p
-                       class="text-sm pt-2 pl-2 ml-[7px] text-gray-600 dark:text-gray-400 border-l border-gray-300 dark:border-gray-700">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci asperiores eius eum quaerat
-                        quidem quod.
-                    </p>
-                </div>
-                <div class="absolute top-2 right-2 flex items-center gap-x-2 text-gray-800 dark:text-gray-500">
-                    <svg class="size-5 cursor-pointer hover:text-gray-700 dark:hover:text-emerald-500">
-                        <use href="#trash"></use>
-                    </svg>
-                    <svg class="size-5 cursor-pointer hover:text-gray-700 dark:hover:text-emerald-500">
-                        <use href="#edit"></use>
-                    </svg>
-                </div>
-                <div class="absolute top-2 left-2">
-                    <span class="text-gray-500 dark:text-gray-500">00:00:00</span>
-                </div>
-            </div>
-            <div class="relative w-full p-4 pt-10 bg-white dark:bg-gray-800 rounded-lg my-shadow">
-                <div class="flex items-center gap-x-3 my-4">
-                    <div class="">
-                        <input id="todo-1" type="checkbox" class="hidden peer todo-checkbox-input">
-                        <label for="todo-1" class="todo-completed-checkbox"></label>
-                    </div>
 
-                    <h3 class="flex-1 text-gray-800 dark:text-gray-100 text-sm lg:text-lg line-clamp-1">learning reactjs
-                        and project </h3>
-                    <button class="h-10 flex-center text-lg bg-emerald-500 hover:bg-emerald-400 text-gray-800 rounded-md cursor-pointer px-4">
-                        start
-                    </button>
-                </div>
-                <div class="text-gray-800 dark:text-gray-100 transition-[max-height] duration-300 overflow-hidden" style="max-height: 24px">
-                    <button aria-expanded="false" class="descriptionBtn flex items-center gap-x-2 cursor-pointer">
+                <!--moreDetails-->
+                <div class="text-gray-600 dark:text-gray-300 transition-[max-height] duration-300 overflow-hidden" style="max-height: 24px">
+                    <button aria-expanded="false" class="moreDetailsBtn flex items-center gap-x-2 cursor-pointer">
                         <svg class="size-4 transition duration-300">
                             <use href="#chevron-down"></use>
                         </svg>
-                        description
+                        more details
                     </button>
-                    <p
-                            class="text-sm pt-2 pl-2 ml-[7px] text-gray-600 dark:text-gray-400 border-l border-gray-300 dark:border-gray-700">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci asperiores eius eum quaerat
-                        quidem quod.
-                    </p>
-                </div>
-                <div class="absolute top-2 right-2 flex items-center gap-x-2 text-gray-800 dark:text-gray-500">
-                    <svg class="size-5 cursor-pointer hover:text-gray-700 dark:hover:text-emerald-500">
-                        <use href="#trash"></use>
-                    </svg>
-                    <svg class="size-5 cursor-pointer hover:text-gray-700 dark:hover:text-emerald-500">
-                        <use href="#edit"></use>
-                    </svg>
-                </div>
-                <div class="absolute top-2 left-2">
-                    <span class="text-gray-500 dark:text-gray-500">00:00:00</span>
-                </div>
-            </div>
-            <div class="relative w-full p-4 pt-10 bg-white dark:bg-gray-800 rounded-lg my-shadow">
-                <div class="flex items-center gap-x-3 my-4">
-                    <div class="">
-                        <input id="todo-1" type="checkbox" class="hidden peer todo-checkbox-input">
-                        <label for="todo-1" class="todo-completed-checkbox"></label>
+                    <div
+                       class="text-sm pt-3 pl-2 ml-[7px] text-gray-600 dark:text-gray-400 border-l border-gray-300 dark:border-gray-700">
+                        <span class="text-emerald-500 text-base">
+                            #personal
+                        </span>
+                        <p class="py-3 text-amber-500">
+                            july 11, 2005
+                        </p>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci asperiores eius eum quaerat
+                            quidem quod.
+                        </p>
                     </div>
-
-                    <h3 class="flex-1 text-gray-800 dark:text-gray-100 text-sm lg:text-lg line-clamp-1">learning reactjs
-                        and project </h3>
-                    <button class="h-10 flex-center text-lg bg-emerald-500 hover:bg-emerald-400 text-gray-800 rounded-md cursor-pointer px-4">
-                        start
-                    </button>
-                </div>
-                <div class="text-gray-800 dark:text-gray-100 transition-[max-height] duration-300 overflow-hidden" style="max-height: 24px">
-                    <button aria-expanded="false" class="descriptionBtn flex items-center gap-x-2 cursor-pointer">
-                        <svg class="size-4 transition duration-300">
-                            <use href="#chevron-down"></use>
-                        </svg>
-                        description
-                    </button>
-                    <p
-                            class="text-sm pt-2 pl-2 ml-[7px] text-gray-600 dark:text-gray-400 border-l border-gray-300 dark:border-gray-700">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci asperiores eius eum quaerat
-                        quidem quod.
-                    </p>
-                </div>
-                <div class="absolute top-2 right-2 flex items-center gap-x-2 text-gray-800 dark:text-gray-500">
-                    <svg class="size-5 cursor-pointer hover:text-gray-700 dark:hover:text-emerald-500">
-                        <use href="#trash"></use>
-                    </svg>
-                    <svg class="size-5 cursor-pointer hover:text-gray-700 dark:hover:text-emerald-500">
-                        <use href="#edit"></use>
-                    </svg>
-                </div>
-                <div class="absolute top-2 left-2">
-                    <span class="text-gray-500 dark:text-gray-500">00:00:00</span>
-                </div>
-            </div>
-            <div class="relative w-full p-4 pt-10 bg-white dark:bg-gray-800 rounded-lg my-shadow">
-                <div class="flex items-center gap-x-3 my-4">
-                    <div class="">
-                        <input id="todo-1" type="checkbox" class="hidden peer todo-checkbox-input">
-                        <label for="todo-1" class="todo-completed-checkbox"></label>
-                    </div>
-
-                    <h3 class="flex-1 text-gray-800 dark:text-gray-100 text-sm lg:text-lg line-clamp-1">learning reactjs
-                        and project </h3>
-                    <button class="h-10 flex-center text-lg bg-emerald-500 hover:bg-emerald-400 text-gray-800 rounded-md cursor-pointer px-4">
-                        start
-                    </button>
-                </div>
-                <div class="text-gray-800 dark:text-gray-100 transition-[max-height] duration-300 overflow-hidden" style="max-height: 24px">
-                    <button aria-expanded="false" class="descriptionBtn flex items-center gap-x-2 cursor-pointer">
-                        <svg class="size-4 transition duration-300">
-                            <use href="#chevron-down"></use>
-                        </svg>
-                        description
-                    </button>
-                    <p
-                            class="text-sm pt-2 pl-2 ml-[7px] text-gray-600 dark:text-gray-400 border-l border-gray-300 dark:border-gray-700">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci asperiores eius eum quaerat
-                        quidem quod.
-                    </p>
-                </div>
-                <div class="absolute top-2 right-2 flex items-center gap-x-2 text-gray-800 dark:text-gray-500">
-                    <svg class="size-5 cursor-pointer hover:text-gray-700 dark:hover:text-emerald-500">
-                        <use href="#trash"></use>
-                    </svg>
-                    <svg class="size-5 cursor-pointer hover:text-gray-700 dark:hover:text-emerald-500">
-                        <use href="#edit"></use>
-                    </svg>
-                </div>
-                <div class="absolute top-2 left-2">
-                    <span class="text-gray-500 dark:text-gray-500">00:00:00</span>
-                </div>
-            </div>
-            <div class="relative w-full p-4 pt-10 bg-white dark:bg-gray-800 rounded-lg my-shadow">
-                <div class="flex items-center gap-x-3 my-4">
-                    <div class="">
-                        <input id="todo-1" type="checkbox" class="hidden peer todo-checkbox-input">
-                        <label for="todo-1" class="todo-completed-checkbox"></label>
-                    </div>
-
-                    <h3 class="flex-1 text-gray-800 dark:text-gray-100 text-sm lg:text-lg line-clamp-1">learning reactjs
-                        and project </h3>
-                    <button class="h-10 flex-center text-lg bg-emerald-500 hover:bg-emerald-400 text-gray-800 rounded-md cursor-pointer px-4">
-                        start
-                    </button>
-                </div>
-                <div class="text-gray-800 dark:text-gray-100 transition-[max-height] duration-300 overflow-hidden" style="max-height: 24px">
-                    <button aria-expanded="false" class="descriptionBtn flex items-center gap-x-2 cursor-pointer">
-                        <svg class="size-4 transition duration-300">
-                            <use href="#chevron-down"></use>
-                        </svg>
-                        description
-                    </button>
-                    <p
-                            class="text-sm pt-2 pl-2 ml-[7px] text-gray-600 dark:text-gray-400 border-l border-gray-300 dark:border-gray-700">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci asperiores eius eum quaerat
-                        quidem quod.
-                    </p>
-                </div>
-                <div class="absolute top-2 right-2 flex items-center gap-x-2 text-gray-800 dark:text-gray-500">
-                    <svg class="size-5 cursor-pointer hover:text-gray-700 dark:hover:text-emerald-500">
-                        <use href="#trash"></use>
-                    </svg>
-                    <svg class="size-5 cursor-pointer hover:text-gray-700 dark:hover:text-emerald-500">
-                        <use href="#edit"></use>
-                    </svg>
-                </div>
-                <div class="absolute top-2 left-2">
-                    <span class="text-gray-500 dark:text-gray-500">00:00:00</span>
                 </div>
             </div>
         </section>
