@@ -1,12 +1,11 @@
 import {toggleNewTodoContainer, newTodoContainerBtn} from "./utils/utils.js";
 
-
-newTodoContainerBtn.addEventListener('click', () => {
-    toggleNewTodoContainer();
-});
-
 const moreDetailsBtn = document.querySelectorAll('.moreDetailsBtn');
+const exportBtn = document.querySelector('#exportBtn');
+const exportContainer = document.querySelector('#exportContainer');
 
+
+// show todos more details
 moreDetailsBtn.forEach((btn) => {
     btn.addEventListener('click', (event) => {
         const isOpen = btn.getAttribute('aria-expended') === 'true';
@@ -22,4 +21,21 @@ moreDetailsBtn.forEach((btn) => {
             icon.classList.add('rotate-180');
         }
     })
-})
+});
+
+// show export box
+exportBtn.addEventListener('click', () => {
+    exportContainer.classList.toggle('hidden');
+});
+document.addEventListener('click', (event) => {
+    if (event.target !== exportBtn) {
+        exportContainer.classList.add('hidden');
+    }
+});
+
+// show todo create form
+newTodoContainerBtn.addEventListener('click', () => {
+    toggleNewTodoContainer();
+});
+
+
