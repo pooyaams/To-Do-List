@@ -5,9 +5,9 @@ newTodoContainerBtn.addEventListener('click', () => {
     toggleNewTodoContainer();
 });
 
-const descriptionBtn = document.querySelectorAll('.descriptionBtn');
+const moreDetailsBtn = document.querySelectorAll('.moreDetailsBtn');
 
-descriptionBtn.forEach((btn) => {
+moreDetailsBtn.forEach((btn) => {
     btn.addEventListener('click', (event) => {
         const isOpen = btn.getAttribute('aria-expended') === 'true';
         const icon = btn.querySelector('svg');
