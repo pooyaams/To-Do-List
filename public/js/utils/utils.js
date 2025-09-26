@@ -26,7 +26,6 @@ const toggleNewTodoContainer = () => {
 
 }
 
-
 export {
     toggleNewTodoContainer,
     newTodoContainerBtn

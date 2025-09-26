@@ -10,7 +10,7 @@
     <link rel="icon" href="public/images/favicon.png">
     <link rel="stylesheet" href="public/css/style.css">
 </head>
-<body class="bg-gray-100 dark:bg-gray-900 font-inter">
+<body class="bg-gray-100 dark:bg-gray-900 font-inter transition-colors duration-300">
 <svg class="hidden">
     <symbol id="moon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
             stroke="currentColor">
@@ -73,12 +73,12 @@
         <div class="flex items-center gap-x-3">
 
             <!--theme-->
-            <button class="size-10 flex-center bg-emerald-500 hover:bg-emerald-400 text-gray-800 rounded-md cursor-pointer">
-                <svg class="size-6">
+            <button id="themeToggleBtn" class="size-10 flex-center bg-emerald-500 hover:bg-emerald-400 text-gray-800 rounded-md cursor-pointer">
+                <svg id="themeSun" class="size-6">
                     <use href="#sun"></use>
                 </svg>
 
-                <svg class="size-6 hidden">
+                <svg id="themeMoon" class="size-6 hidden">
                     <use href="#moon"></use>
                 </svg>
             </button>
@@ -270,10 +270,10 @@
                     </div>
                     <div class="flex-1">
                         <div class="flex items-center justify-end gap-x-2 text-gray-800 dark:text-gray-500">
-                            <svg class="size-5 cursor-pointer hover:text-gray-700 dark:hover:text-emerald-500">
+                            <svg class="size-5 cursor-pointer hover:text-emerald-500">
                                 <use href="#trash"></use>
                             </svg>
-                            <svg class="size-5 cursor-pointer hover:text-gray-700 dark:hover:text-emerald-500">
+                            <svg class="size-5 cursor-pointer hover:text-emerald-500">
                                 <use href="#edit"></use>
                             </svg>
                         </div>
@@ -333,6 +333,7 @@
 
 </section>
 
+<script src="public/js/theme.js" type="module"></script>
 <script src="public/js/app.js" type="module"></script>
 </body>
 </html>
