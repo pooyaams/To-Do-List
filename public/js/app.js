@@ -1,4 +1,12 @@
-import {colorStars, newTodoContainerBtn, toggleNewTodoContainer} from "./utils/utils.js";
+import {
+    colorStars,
+    getSavedTodos,
+    idGenerator,
+    newTodoContainerBtn,
+    notyf,
+    saveTodos,
+    toggleNewTodoContainer
+} from "./utils/utils.js";
 
 const moreDetailsBtn = document.querySelectorAll('.moreDetailsBtn');
 const exportBtn = document.querySelector('#exportBtn');
@@ -9,9 +17,12 @@ const newTodoCategory = document.querySelector('#newTodoCategory');
 const titleLength = document.querySelector('#titleLength');
 const descriptionLength = document.querySelector('#descriptionLength');
 const newTodoStars = document.querySelectorAll('.newTodoStars');
+const submitTodo = document.querySelector('#submitTodo');
 
+const todos = getSavedTodos() || [];
 let difficulty = 1;
 let category = 'all';
+let page = 1;
 
 // show todos more details
 moreDetailsBtn.forEach((btn) => {
@@ -84,4 +95,38 @@ newTodoStars.forEach((star) => {
 // handle category
 newTodoCategory.addEventListener('change', (event) => {
     category = event.target.value;
+});
+
+// create todo
+submitTodo.addEventListener('click', (e) => {
+    e.preventDefault();
+    const title = newTodoTitle.value.trim();
+    const description = newTodoDescription.value.trim();
+
+    if (title !== "") {
+        const todo = {
+            id: idGenerator(),
+            title,
+            description,
+            category,
+            difficulty,
+            timer: 0,
+            status: 'notStarted',
+            isComplete: false,
+            createdAt: Date.now()
+        }
+
+        todos.push(todo);
+        saveTodos(todos);
+        notyf.success('New task added.');
+
+        newTodoTitle.value = '';
+        newTodoDescription.value = '';
+        category = 'all';
+        difficulty = 1;
+        colorStars(newTodoStars, 1);
+        newTodoCategory.selectedIndex = 0;
+    }else {
+        notyf.error('Title cannot be empty.');
+    }
 });

@@ -2,6 +2,15 @@ const newTodoContainer = document.querySelector('#newTodoContainer');
 const newTodoForm = document.querySelector('#newTodoForm');
 const newTodoContainerBtn = document.querySelector('#newTodoContainerBtn');
 
+const notyf = new Notyf({
+    duration: 3000,
+    position: {
+        x: 'right',
+        y: 'top'
+    },
+    dismissible: false
+});
+
 const toggleNewTodoContainer = () => {
     const isOpen = newTodoContainerBtn.getAttribute('aria-expanded') === 'true';
 
@@ -38,8 +47,24 @@ const colorStars = (stars, range) => {
     })
 }
 
+const idGenerator = () => {
+    return Date.now().toString() + (Math.floor(Math.random() * 10000000000)).toString();
+}
+
+const saveTodos = (todos) => {
+    localStorage.setItem('todos', JSON.stringify(todos));
+}
+
+const getSavedTodos = () => {
+    return JSON.parse(localStorage.getItem('todos'));
+}
+
 export {
     toggleNewTodoContainer,
     newTodoContainerBtn,
-    colorStars
+    colorStars,
+    idGenerator,
+    saveTodos,
+    getSavedTodos,
+    notyf,
 }
