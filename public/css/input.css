@@ -47,7 +47,7 @@
     }
 
     .my-shadow {
-        @apply shadow-light dark:shadow-dark;
+        @apply !shadow-light dark:!shadow-dark;
     }
 }
 

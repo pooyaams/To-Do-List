@@ -4,7 +4,7 @@ import {
     idGenerator,
     newTodoContainerBtn,
     notyf,
-    saveTodos, showTodos,
+    saveTodos, showConfirmModal, showTodos,
     toggleNewTodoContainer
 } from "./utils/utils.js";
 
@@ -177,4 +177,20 @@ todosContainer.addEventListener('click', (event) => {
     todos[todoIndex].isComplete = checkBtn.checked;
     saveTodos(todos);
     showTodos(checkTodosCount());
-})
+});
+
+// delete todo
+todosContainer.addEventListener('click', (event) => {
+    const deleteBtn = event.target.closest('.deleteTodo');
+    if (!deleteBtn) return;
+
+    showConfirmModal('Delete this todo?', () => {
+        const todoId = deleteBtn.dataset.id;
+        const todoIndex = todos.findIndex(todo => todo.id === todoId);
+
+        todos.splice(todoIndex, 1);
+        saveTodos(todos);
+        showTodos(checkTodosCount());
+    });
+});
+

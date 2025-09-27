@@ -154,7 +154,27 @@ const showTodos = (todos) => {
 
             `
         )
-    })
+    });
+}
+
+const showConfirmModal = (title, callback) => {
+    Swal.fire({
+        title: title,
+        showCancelButton: true,
+        cancelButtonText: 'No',
+        showConfirmButton: true,
+        confirmButtonText: 'Yes',
+        customClass: {
+            popup: '!bg-white dark:!bg-gray-800 my-shadow',
+            title: '!text-xl text-gray-800 dark:!text-gray-100',
+            confirmButton: '!h-10 !flex !items-center !justify-center !bg-red-500 !text-gray-800 dark:!text-gray-100 !px-8  !shadow-none',
+            cancelButton: '!h-10 !flex !items-center !justify-center !bg-transparent !border !border-gray-500 !text-gray-800 dark:!text-gray-100 !px-8 '
+        }
+    }).then((result) => {
+        if (result.isConfirmed) {
+            callback();
+        }
+    });
 }
 
 export {
@@ -165,5 +185,6 @@ export {
     saveTodos,
     getSavedTodos,
     notyf,
-    showTodos
+    showTodos,
+    showConfirmModal
 }

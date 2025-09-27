@@ -5,6 +5,7 @@
   "dependencies": {
     "@tailwindcss/cli": "^4.1.13",
     "notyf": "^3.10.0",
+    "sweetalert2": "^11.23.0",
     "tailwindcss": "^4.1.13"
   }
 }
