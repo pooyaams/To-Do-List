@@ -243,90 +243,21 @@
         </section>
 
         <!--todos-->
-        <section id="todosContainer" class="space-y-4 my-4">
-            <div class="w-full px-4 pb-4 pt-2 bg-white dark:bg-gray-800 rounded-lg my-shadow">
-                <!--difficulty & edit & delete-->
-                <div class="flex items-center justify-between">
-                    <div class="flex-1">
-                        <div class="flex items-center justify-start gap-x-0.5 cursor-pointer text-gray-800 dark:text-gray-300">
-                            <svg class="size-4 text-amber-500">
-                                <use href="#star"></use>
-                            </svg>
-                            <svg class="size-4">
-                                <use href="#star"></use>
-                            </svg>
-                            <svg class="size-4">
-                                <use href="#star"></use>
-                            </svg>
-                            <svg class="size-4">
-                                <use href="#star"></use>
-                            </svg>
-                            <svg class="size-4">
-                                <use href="#star"></use>
-                            </svg>
-                        </div>
-                    </div>
-                    <div class="flex-1">
-                        <span class="flex items-start justify-center text-gray-500 dark:text-gray-500">00:00:00</span>
-                    </div>
-                    <div class="flex-1">
-                        <div class="flex items-center justify-end gap-x-2 text-gray-800 dark:text-gray-500">
-                            <svg class="size-5 cursor-pointer hover:text-emerald-500">
-                                <use href="#trash"></use>
-                            </svg>
-                            <svg class="size-5 cursor-pointer hover:text-emerald-500">
-                                <use href="#edit"></use>
-                            </svg>
-                        </div>
-                    </div>
-                </div>
-
-                <!--title-->
-                <div class="flex items-center gap-x-3 my-4">
-                    <div class="">
-                        <input id="todo-1" type="checkbox" class="hidden peer todo-checkbox-input">
-                        <label for="todo-1" class="todo-completed-checkbox"></label>
-                    </div>
-
-                    <h3 class="flex-1 text-gray-800 dark:text-gray-100 text-sm lg:text-lg line-clamp-1">learn js and react and nextjs
-                    </h3>
-                    <button class="h-10 flex-center text-lg bg-emerald-500 hover:bg-emerald-400 text-gray-800 rounded-md cursor-pointer px-4">
-                        start
-                    </button>
-                </div>
-
-                <!--moreDetails-->
-                <div class="text-gray-600 dark:text-gray-300 transition-[max-height] duration-300 overflow-hidden" style="max-height: 24px">
-                    <button aria-expanded="false" class="moreDetailsBtn flex items-center gap-x-2 cursor-pointer">
-                        <svg class="size-4 transition duration-300">
-                            <use href="#chevron-down"></use>
-                        </svg>
-                        more details
-                    </button>
-                    <div
-                            class="text-sm pt-3 pl-2 ml-[7px] text-gray-600 dark:text-gray-400 border-l border-gray-300 dark:border-gray-700">
-                        <span class="text-emerald-500 text-base">
-                            #personal
-                        </span>
-                        <p class="py-3 text-amber-500">
-                            july 11, 2005
-                        </p>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci asperiores eius eum quaerat
-                            quidem quod.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <section id="todosContainer" class="space-y-4 my-4"></section>
 
         <!--show more todos button-->
         <div class="w-full flex justify-center mt-8">
-            <button class="h-10 flex-center gap-x-2 text-emerald-600 dark:text-emerald-500 border border-emerald-500 rounded-md cursor-pointer px-3 hover:bg-emerald-100 dark:hover:bg-emerald-900/20">
+            <button id="showMoreTodos" class="h-10 flex-center gap-x-2 text-emerald-600 dark:text-emerald-500 border border-emerald-500 rounded-md cursor-pointer px-3 hover:bg-emerald-100 dark:hover:bg-emerald-900/20">
                 <svg class="size-5">
                     <use href="#chevron-down"></use>
                 </svg>
                 show more
+            </button>
+            <button id="showLessTodos" class="h-10 flex-center gap-x-2 text-red-500 dark:text-red-500 border border-red-500 rounded-md cursor-pointer px-3 hover:bg-red-100 dark:hover:bg-red-900/20 !hidden">
+                <svg class="size-5 rotate-180">
+                    <use href="#chevron-down"></use>
+                </svg>
+                show less
             </button>
         </div>
     </main>

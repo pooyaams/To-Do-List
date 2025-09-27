@@ -4,11 +4,10 @@ import {
     idGenerator,
     newTodoContainerBtn,
     notyf,
-    saveTodos,
+    saveTodos, showTodos,
     toggleNewTodoContainer
 } from "./utils/utils.js";
 
-const moreDetailsBtn = document.querySelectorAll('.moreDetailsBtn');
 const exportBtn = document.querySelector('#exportBtn');
 const exportContainer = document.querySelector('#exportContainer');
 const newTodoTitle = document.querySelector('#newTodoTitle');
@@ -18,29 +17,36 @@ const titleLength = document.querySelector('#titleLength');
 const descriptionLength = document.querySelector('#descriptionLength');
 const newTodoStars = document.querySelectorAll('.newTodoStars');
 const submitTodo = document.querySelector('#submitTodo');
+const todosContainer = document.querySelector('#todosContainer');
+const showMoreTodosBtn = document.querySelector('#showMoreTodos');
+const showLessTodosBtn = document.querySelector('#showLessTodos');
 
-const todos = getSavedTodos() || [];
+let todos = getSavedTodos() || [];
 let difficulty = 1;
 let category = 'all';
 let page = 1;
+const todosPerPage = 5;
+let stopIndex;
 
 // show todos more details
-moreDetailsBtn.forEach((btn) => {
-    btn.addEventListener('click', (event) => {
-        const isOpen = btn.getAttribute('aria-expended') === 'true';
-        const icon = btn.querySelector('svg');
+document.addEventListener('click', (event) => {
+    const btn = event.target.closest('.moreDetailsBtn');
+    if (!btn) return;
 
-        if (isOpen) {
-            btn.parentElement.style.maxHeight = '24px';
-            btn.setAttribute('aria-expended', 'false');
-            icon.classList.remove('rotate-180');
-        }else {
-            btn.parentElement.style.maxHeight = btn.parentElement.scrollHeight + 'px';
-            btn.setAttribute('aria-expended', 'true');
-            icon.classList.add('rotate-180');
-        }
-    })
-});
+    const isOpen = btn.getAttribute('aria-expended') === 'true';
+    const icon = btn.querySelector('svg');
+
+    if (isOpen) {
+        btn.parentElement.style.maxHeight = '24px';
+        btn.setAttribute('aria-expended', 'false');
+        icon.classList.remove('rotate-180');
+    } else {
+        btn.parentElement.style.maxHeight = btn.parentElement.scrollHeight + 'px';
+        btn.setAttribute('aria-expended', 'true');
+        icon.classList.add('rotate-180');
+    }
+})
+
 
 // show export box
 exportBtn.addEventListener('click', () => {
@@ -119,6 +125,7 @@ submitTodo.addEventListener('click', (e) => {
         todos.push(todo);
         saveTodos(todos);
         notyf.success('New task added.');
+        showTodos(checkTodosCount());
 
         newTodoTitle.value = '';
         newTodoDescription.value = '';
@@ -126,7 +133,36 @@ submitTodo.addEventListener('click', (e) => {
         difficulty = 1;
         colorStars(newTodoStars, 1);
         newTodoCategory.selectedIndex = 0;
-    }else {
+    } else {
         notyf.error('Title cannot be empty.');
     }
 });
+
+// show todos
+const checkTodosCount = () => {
+     stopIndex = (page * todosPerPage);
+
+    if (stopIndex >= todos.length) {
+        showMoreTodosBtn.classList.add('!hidden');
+        showLessTodosBtn.classList.remove('!hidden');
+    }else {
+        showMoreTodosBtn.classList.remove('!hidden');
+        showLessTodosBtn.classList.add('!hidden');
+    }
+
+    return [...todos].reverse().splice(0, stopIndex)
+}
+showTodos(checkTodosCount());
+
+// show more todos
+showMoreTodosBtn.addEventListener('click', () => {
+    page++;
+    showTodos(checkTodosCount());
+});
+
+// show less todos
+showLessTodosBtn.addEventListener('click', () => {
+    page = 1;
+    showTodos(checkTodosCount());
+});
+
