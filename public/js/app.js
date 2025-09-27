@@ -47,7 +47,6 @@ document.addEventListener('click', (event) => {
     }
 })
 
-
 // show export box
 exportBtn.addEventListener('click', () => {
     exportContainer.classList.toggle('hidden');
@@ -140,12 +139,12 @@ submitTodo.addEventListener('click', (e) => {
 
 // show todos
 const checkTodosCount = () => {
-     stopIndex = (page * todosPerPage);
+    stopIndex = (page * todosPerPage);
 
     if (stopIndex >= todos.length) {
         showMoreTodosBtn.classList.add('!hidden');
         showLessTodosBtn.classList.remove('!hidden');
-    }else {
+    } else {
         showMoreTodosBtn.classList.remove('!hidden');
         showLessTodosBtn.classList.add('!hidden');
     }
@@ -194,3 +193,134 @@ todosContainer.addEventListener('click', (event) => {
     });
 });
 
+// edit todo
+todosContainer.addEventListener('click', (event) => {
+    const editBtn = event.target.closest('.editTodo');
+    if (!editBtn) return;
+
+    const todoId = editBtn.dataset.id;
+    const todoIndex = todos.findIndex(todo => todo.id === todoId);
+
+    Swal.fire({
+        title: 'Edit todo',
+        html: `
+        <form class="bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 p-4">
+
+            <div class="relative">
+                <input type="text" autocomplete="off" maxlength="30" id="editTodoTitle"
+                       class="w-full bg-gray-100 dark:bg-gray-800 border border-gray-600 dark:border-gray-400 rounded-sm py-2 pl-2 pr-12 mt-1"
+                       required value="${todos[todoIndex].title}" placeholder="Enter todo title">
+                <div class="absolute right-2 top-4 text-xs text-gray-400 dark:text-gray-500">
+                    <span id="editTitleLength">${todos[todoIndex].title.length}</span>
+                    / 30
+                </div>
+            </div>
+            <div class="relative mt-3">
+                <textarea type="text"   maxlength="120" rows="3" id="editTodoDescription"
+                          class="w-full bg-gray-100 dark:bg-gray-800 border border-gray-600 dark:border-gray-400 rounded-sm pt-2 !pb-10 px-2 mt-1"
+                          placeholder="Add description (optional)">${todos[todoIndex].description}</textarea>
+                <div class="absolute right-3 bottom-3 text-xs text-gray-400 dark:text-gray-500">
+                    <span id="editDescriptionLength">${todos[todoIndex].description.length}</span>
+                    / 120
+                </div>
+            </div>
+            <div class="flex items-center gap-x-3 mt-2">
+                <!--category-->
+                <div class="flex-1">
+                    <select type="text" id="editTodoCategory"
+                            class="w-full h-10 bg-gray-100 dark:bg-gray-800 border border-gray-600 dark:border-gray-400 rounded-sm px-2 mt-1">
+                        <option value="all">All</option>
+                        <option value="personal">Personal</option>
+                        <option value="education">Education</option>
+                        <option value="work">Work</option>
+                        <option value="shopping">Shopping</option>
+                    </select>
+                </div>
+                <!--difficulty-->
+                <div class="flex-1">
+                    <select type="text" id="editTodoDifficulty"
+                            class="w-full h-10 bg-gray-100 dark:bg-gray-800 border border-gray-600 dark:border-gray-400 rounded-sm px-2 mt-1">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                </div>
+               
+            </div>
+            <!--edit btn-->
+            <div class="block mt-4">
+                <button id="submitEditBtn" class="w-full h-10 flex-center gap-x-2 text-gray-800 bg-emerald-500 hover:bg-emerald-400 rounded-md cursor-pointer">
+                    <svg class="size-5">
+                        <use href="#edit"></use>
+                    </svg>
+                    Edit
+                </button>
+            </div>
+        </form>
+    `,
+        showConfirmButton: false,
+        showCancelButton: false,
+        showCloseButton: true,
+        customClass: {
+            popup: '!bg-white dark:!bg-gray-800 my-shadow',
+            title: '!text-xl text-gray-800 dark:!text-gray-100 !text-left',
+            closeButton: '!shadow-none'
+        }
+    });
+
+    const editTodoTitle = document.querySelector('#editTodoTitle');
+    const editTodoDescription = document.querySelector('#editTodoDescription');
+    const editTodoCategory = document.querySelector('#editTodoCategory');
+    const editTodoDifficulty = document.querySelector('#editTodoDifficulty');
+    const editTitleLength = document.querySelector('#editTitleLength');
+    const editDescriptionLength = document.querySelector('#editDescriptionLength');
+    const submitEditBtn = document.querySelector('#submitEditBtn');
+
+    // show editing todo data
+    editTodoCategory.value = todos[todoIndex].category;
+    editTodoDifficulty.value = todos[todoIndex].difficulty;
+
+    // handle edit todo title and description length
+    editTodoTitle.addEventListener('input', (event) => {
+
+        if (event.target.value.length > 30) {
+            event.target.value = event.target.value.slice(0, 30);
+        }
+        console.log(event.target.value.length)
+        editTitleLength.innerHTML = event.target.value.length;
+
+    });
+    editTodoDescription.addEventListener('input', (event) => {
+
+        if (event.target.value.length > 120) {
+            event.target.value = event.target.value.slice(0, 30);
+        }
+
+        editDescriptionLength.innerHTML = event.target.value.length;
+    });
+
+    // submit edit
+    submitEditBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+
+        if (editTodoTitle.value.trim() !== "") {
+            todos[todoIndex].title = editTodoTitle.value.trim();
+            todos[todoIndex].description = editTodoDescription.value.trim();
+            todos[todoIndex].difficulty = editTodoDifficulty.value;
+            todos[todoIndex].category = editTodoCategory.value;
+
+            saveTodos(todos);
+            showTodos(checkTodosCount());
+            notyf.success('Todo edited successfully.');
+            Swal.close();
+        } else {
+            notyf.error('Title cannot be empty.');
+        }
+    })
+
+    saveTodos(todos);
+    showTodos(checkTodosCount());
+
+});
