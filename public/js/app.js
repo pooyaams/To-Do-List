@@ -7,6 +7,7 @@ import {
     saveTodos, showConfirmModal, showTodos,
     toggleNewTodoContainer
 } from "./utils/utils.js";
+import {startTimer, stopTimer} from "./timer.js";
 
 const exportBtn = document.querySelector('#exportBtn');
 const exportContainer = document.querySelector('#exportContainer');
@@ -364,3 +365,26 @@ const resetFilters = () => {
 filterCategory.addEventListener('change', filterTodos);
 filterDifficulty.addEventListener('change', filterTodos);
 filterStatus.addEventListener('change', filterTodos);
+
+// timer
+todosContainer.addEventListener('click', (event) => {
+    const startBtn = event.target.closest('.todoStartBtn');
+    if (!startBtn) return;
+
+    const todoId = startBtn.dataset.id;
+
+    startTimer(todoId, todos);
+    startBtn.nextElementSibling.classList.remove('!hidden');
+    startBtn.classList.add('!hidden');
+}); // start timer
+todosContainer.addEventListener('click', (event) => {
+    const stopBtn = event.target.closest('.todoStopBtn');
+    if (!stopBtn) return;
+
+    const todoId = stopBtn.dataset.id;
+
+    stopTimer(todoId);
+
+    stopBtn.previousElementSibling.classList.remove('!hidden');
+    stopBtn.classList.add('!hidden');
+}); // stop timer

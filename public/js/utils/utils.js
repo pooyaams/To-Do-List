@@ -1,3 +1,5 @@
+import {formatTime} from "../timer.js";
+
 const newTodoContainer = document.querySelector('#newTodoContainer');
 const newTodoForm = document.querySelector('#newTodoForm');
 const newTodoContainerBtn = document.querySelector('#newTodoContainerBtn');
@@ -100,7 +102,7 @@ const showTodos = (todos) => {
                         </div>
                     </div>
                     <div class="flex-1">
-                        <span id="timer-${todo.id}" class="flex items-start justify-center text-gray-500 dark:text-gray-500">00:00:00</span>
+                        <span id="timer-${todo.id}" class="flex items-start justify-center text-gray-500 dark:text-gray-500">${formatTime(todo.timer)}</span>
                     </div>
                     <div class="flex-1">
                         <div class="flex items-center justify-end gap-x-2 text-gray-800 dark:text-gray-500">
@@ -122,8 +124,11 @@ const showTodos = (todos) => {
                     </div>
 
                     <h3 class="flex-1 text-gray-800 dark:text-gray-100 text-sm lg:text-lg line-clamp-1 ${todo.isComplete ? 'line-through' : ''}">${todo.title}</h3>
-                    <button data-id="${todo.id}" class="h-10 flex-center text-lg bg-emerald-500 hover:bg-emerald-400 text-gray-800 rounded-md cursor-pointer px-4">
+                    <button data-id="${todo.id}" class="todoStartBtn h-10 flex-center text-lg bg-emerald-500 hover:bg-emerald-400 text-gray-800 rounded-md cursor-pointer px-4">
                         start
+                    </button>
+                    <button data-id="${todo.id}" class="todoStopBtn h-10 flex-center text-lg bg-red-500 hover:bg-red-400 text-gray-800 rounded-md cursor-pointer px-4 !hidden">
+                        stop
                     </button>
                 </div>
 
