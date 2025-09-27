@@ -20,6 +20,9 @@ const submitTodo = document.querySelector('#submitTodo');
 const todosContainer = document.querySelector('#todosContainer');
 const showMoreTodosBtn = document.querySelector('#showMoreTodos');
 const showLessTodosBtn = document.querySelector('#showLessTodos');
+const filterCategory = document.querySelector('#filter-category');
+const filterDifficulty = document.querySelector('#filter-difficulty');
+const filterStatus = document.querySelector('#filter-status');
 
 let todos = getSavedTodos() || [];
 let difficulty = 1;
@@ -27,6 +30,7 @@ let category = 'all';
 let page = 1;
 const todosPerPage = 5;
 let stopIndex;
+let showingTodos = [...todos];
 
 // show todos more details
 document.addEventListener('click', (event) => {
@@ -124,7 +128,8 @@ submitTodo.addEventListener('click', (e) => {
         todos.push(todo);
         saveTodos(todos);
         notyf.success('New task added.');
-        showTodos(checkTodosCount());
+        showTodos(checkTodosCount(todos));
+        resetFilters();
 
         newTodoTitle.value = '';
         newTodoDescription.value = '';
@@ -138,7 +143,7 @@ submitTodo.addEventListener('click', (e) => {
 });
 
 // show todos
-const checkTodosCount = () => {
+const checkTodosCount = (todos) => {
     stopIndex = (page * todosPerPage);
 
     if (stopIndex >= todos.length) {
@@ -149,20 +154,20 @@ const checkTodosCount = () => {
         showLessTodosBtn.classList.add('!hidden');
     }
 
-    return [...todos].reverse().splice(0, stopIndex)
+    return [...todos].reverse().splice(0, stopIndex);
 }
-showTodos(checkTodosCount());
+showTodos(checkTodosCount(todos));
 
 // show more todos
 showMoreTodosBtn.addEventListener('click', () => {
     page++;
-    showTodos(checkTodosCount());
+    showTodos(checkTodosCount(showingTodos));
 });
 
 // show less todos
 showLessTodosBtn.addEventListener('click', () => {
     page = 1;
-    showTodos(checkTodosCount());
+    showTodos(checkTodosCount(showingTodos));
 });
 
 // complete todo
@@ -173,9 +178,21 @@ todosContainer.addEventListener('click', (event) => {
     const todoId = checkBtn.id.substring(10);
     const todoIndex = todos.findIndex(todo => todo.id === todoId);
 
+    if (checkBtn.checked) {
+        todos[todoIndex].status = 'completed';
+    } else {
+
+        // check if todo was started before
+        if (todos[todoIndex].timer === 0) {
+            todos[todoIndex].status = 'notStarted';
+        } else {
+            todos[todoIndex].status = 'inProgress';
+        }
+    }
     todos[todoIndex].isComplete = checkBtn.checked;
+
     saveTodos(todos);
-    showTodos(checkTodosCount());
+    showTodos(checkTodosCount(todos));
 });
 
 // delete todo
@@ -189,7 +206,7 @@ todosContainer.addEventListener('click', (event) => {
 
         todos.splice(todoIndex, 1);
         saveTodos(todos);
-        showTodos(checkTodosCount());
+        showTodos(checkTodosCount(todos));
     });
 });
 
@@ -312,7 +329,7 @@ todosContainer.addEventListener('click', (event) => {
             todos[todoIndex].category = editTodoCategory.value;
 
             saveTodos(todos);
-            showTodos(checkTodosCount());
+            showTodos(checkTodosCount(todos));
             notyf.success('Todo edited successfully.');
             Swal.close();
         } else {
@@ -320,7 +337,30 @@ todosContainer.addEventListener('click', (event) => {
         }
     })
 
-    saveTodos(todos);
-    showTodos(checkTodosCount());
-
 });
+
+// filters
+const filterTodos = () => {
+    page = 1;
+
+    const category = filterCategory.value;
+    const difficulty = filterDifficulty.value;
+    const status = filterStatus.value;
+
+    showingTodos = [...todos].filter((todo) => {
+        return (category === 'all' || todo.category === category) &&
+            (difficulty === 'all' || +todo.difficulty === +difficulty) &&
+            (status === 'all' || todo.status === status)
+    });
+
+    showTodos(checkTodosCount(showingTodos));
+}
+const resetFilters = () => {
+    filterCategory.selected = 0;
+    filterDifficulty.selected = 0;
+    filterStatus.selected = 0;
+}
+
+filterCategory.addEventListener('change', filterTodos);
+filterDifficulty.addEventListener('change', filterTodos);
+filterStatus.addEventListener('change', filterTodos);
