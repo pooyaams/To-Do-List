@@ -166,3 +166,15 @@ showLessTodosBtn.addEventListener('click', () => {
     showTodos(checkTodosCount());
 });
 
+// complete todo
+todosContainer.addEventListener('click', (event) => {
+    const checkBtn = event.target.closest('.todo-checkbox-input');
+    if (!checkBtn) return;
+
+    const todoId = checkBtn.id.substring(10);
+    const todoIndex = todos.findIndex(todo => todo.id === todoId);
+
+    todos[todoIndex].isComplete = checkBtn.checked;
+    saveTodos(todos);
+    showTodos(checkTodosCount());
+})
