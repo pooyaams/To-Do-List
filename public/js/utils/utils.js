@@ -67,14 +67,7 @@ const showTodos = (todos) => {
 
     if (todos.length) {
         todos.forEach((todo) => {
-            const date = new Date(todo.createdAt);
-            const createdAt = date.toLocaleDateString('en-Us', {
-                year: 'numeric',
-                month: "long",
-                day: "numeric",
-                hour: "2-digit",
-                minute: "numeric"
-            });
+            const createdAt = formatDate(todo.createdAt)
 
             let stars = '';
             for (let i = 0; i < todo.difficulty; i++) {
@@ -195,6 +188,17 @@ const showConfirmModal = (title, callback) => {
     });
 }
 
+const formatDate = (timestamp) => {
+    const date = new Date(timestamp);
+     return date.toLocaleDateString('en-Us', {
+        year: 'numeric',
+        month: "long",
+        day: "numeric",
+        hour: "2-digit",
+        minute: "numeric"
+    });
+}
+
 export {
     toggleNewTodoContainer,
     newTodoContainerBtn,
@@ -204,5 +208,6 @@ export {
     getSavedTodos,
     notyf,
     showTodos,
-    showConfirmModal
+    showConfirmModal,
+    formatDate
 }
