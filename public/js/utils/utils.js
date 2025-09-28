@@ -65,34 +65,35 @@ const showTodos = (todos) => {
     const container = document.querySelector('#todosContainer');
     container.innerHTML = '';
 
-    todos.forEach((todo) => {
-        const date = new Date(todo.createdAt);
-        const createdAt = date.toLocaleDateString('en-Us', {
-            year: 'numeric',
-            month: "long",
-            day: "numeric",
-            hour: "2-digit",
-            minute: "numeric"
-        });
+    if (todos.length) {
+        todos.forEach((todo) => {
+            const date = new Date(todo.createdAt);
+            const createdAt = date.toLocaleDateString('en-Us', {
+                year: 'numeric',
+                month: "long",
+                day: "numeric",
+                hour: "2-digit",
+                minute: "numeric"
+            });
 
-        let stars = '';
-        for (let i = 0; i < todo.difficulty; i++) {
-            stars += `
+            let stars = '';
+            for (let i = 0; i < todo.difficulty; i++) {
+                stars += `
                 <svg class="size-4 text-amber-500">
                     <use href="#star"></use>
                 </svg> 
             `
-        }
-        for (let i = 0; i < 5 - todo.difficulty; i++) {
-            stars += `
+            }
+            for (let i = 0; i < 5 - todo.difficulty; i++) {
+                stars += `
                 <svg class="size-4">
                     <use href="#star"></use>
                 </svg> 
             `
-        }
+            }
 
-        container.insertAdjacentHTML("beforeend",
-            `
+            container.insertAdjacentHTML("beforeend",
+                `
             <div class="relative w-full px-4 pb-4 pt-2 bg-white dark:bg-gray-800 rounded-lg my-shadow">
                 <!--difficulty & edit & delete-->
                 <div class="flex items-center justify-between">
@@ -158,8 +159,20 @@ const showTodos = (todos) => {
             </div>
 
             `
+            );
+        });
+    }else {
+        container.insertAdjacentHTML("beforeend",
+            `
+                <div class="w-full flex justify-center items-center flex-col gap-y-4 text-gray-800 dark:text-gray-500 font-bold py-15">
+                    <svg class="size-30">
+                        <use href="#clipboard"></use>
+                    </svg>
+                    <h3 class="text-xl">You have to task</h3>
+                </div>
+            `
         )
-    });
+    }
 }
 
 const showConfirmModal = (title, callback) => {

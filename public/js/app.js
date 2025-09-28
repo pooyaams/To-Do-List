@@ -128,10 +128,14 @@ submitTodo.addEventListener('click', (e) => {
 
         todos.push(todo);
         saveTodos(todos);
-        notyf.success('New task added.');
+        showingTodos = todos;
         showTodos(checkTodosCount(todos));
         resetFilters();
+        notyf.success('New task added.');
 
+        console.log(todos)
+
+        // reset todo form
         newTodoTitle.value = '';
         newTodoDescription.value = '';
         category = 'all';
@@ -144,18 +148,27 @@ submitTodo.addEventListener('click', (e) => {
 });
 
 // show todos
-const checkTodosCount = (todos) => {
+const checkTodosCount = (todosList) => {
     stopIndex = (page * todosPerPage);
 
-    if (stopIndex >= todos.length) {
+    if(todosList.length === 0) { // no todo
         showMoreTodosBtn.classList.add('!hidden');
-        showLessTodosBtn.classList.remove('!hidden');
-    } else {
+        showLessTodosBtn.classList.add('!hidden');
+    } else if (stopIndex < todosList.length) { // if there is more todo to show
         showMoreTodosBtn.classList.remove('!hidden');
         showLessTodosBtn.classList.add('!hidden');
+    } else { // all todos showd
+        showMoreTodosBtn.classList.add('!hidden');
+
+        if (todosList.length > todosPerPage) {
+            showLessTodosBtn.classList.remove('!hidden');
+        }else {
+            showLessTodosBtn.classList.add('!hidden');
+        }
+
     }
 
-    return [...todos].reverse().splice(0, stopIndex);
+    return [...todosList].reverse().splice(0, stopIndex);
 }
 showTodos(checkTodosCount(todos));
 
@@ -193,7 +206,7 @@ todosContainer.addEventListener('click', (event) => {
     todos[todoIndex].isComplete = checkBtn.checked;
 
     saveTodos(todos);
-    showTodos(checkTodosCount(todos));
+    filterTodos(); // if any filter is selected , show filtered todos
 });
 
 // delete todo
@@ -207,7 +220,7 @@ todosContainer.addEventListener('click', (event) => {
 
         todos.splice(todoIndex, 1);
         saveTodos(todos);
-        showTodos(checkTodosCount(todos));
+        filterTodos(); // if any filter is selected , show filtered todos
     });
 });
 
@@ -330,7 +343,7 @@ todosContainer.addEventListener('click', (event) => {
             todos[todoIndex].category = editTodoCategory.value;
 
             saveTodos(todos);
-            showTodos(checkTodosCount(todos));
+            filterTodos(); // if any filter is selected , show filtered todos
             notyf.success('Todo edited successfully.');
             Swal.close();
         } else {
@@ -357,9 +370,9 @@ const filterTodos = () => {
     showTodos(checkTodosCount(showingTodos));
 }
 const resetFilters = () => {
-    filterCategory.selected = 0;
-    filterDifficulty.selected = 0;
-    filterStatus.selected = 0;
+    filterCategory.selectedIndex = 0;
+    filterDifficulty.selectedIndex = 0;
+    filterStatus.selectedIndex = 0;
 }
 
 filterCategory.addEventListener('change', filterTodos);
