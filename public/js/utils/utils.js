@@ -168,7 +168,7 @@ const showTodos = (todos) => {
     }
 }
 
-const showConfirmModal = (title, callback) => {
+const showConfirmModal = (title, callback, rejectCallBack = () => {}) => {
     Swal.fire({
         title: title,
         showCancelButton: true,
@@ -184,6 +184,8 @@ const showConfirmModal = (title, callback) => {
     }).then((result) => {
         if (result.isConfirmed) {
             callback();
+        }else if (result.isDenied) {
+            rejectCallBack();
         }
     });
 }
