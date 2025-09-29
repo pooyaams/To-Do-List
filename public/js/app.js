@@ -393,6 +393,10 @@ todosContainer.addEventListener('click', (event) => {
 
     const todoId = startBtn.dataset.id;
 
+    const todoIndex = todos.findIndex(todo => todo.id === todoId);
+    todos[todoIndex].status = 'inProgress';
+    saveTodos(todos);
+
     startTimer(todoId, todos);
     startBtn.nextElementSibling.classList.remove('!hidden');
     startBtn.classList.add('!hidden');
