@@ -189,6 +189,10 @@ showMoreTodosBtn.addEventListener('click', () => {
 showLessTodosBtn.addEventListener('click', () => {
     page = 1;
     showTodos(checkTodosCount(showingTodos));
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
 });
 
 // complete todo
