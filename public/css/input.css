@@ -49,6 +49,18 @@
     .my-shadow {
         @apply !shadow-light dark:!shadow-dark;
     }
+
+    @keyframes big-bounce {
+        0%, 100% {
+            transform: translateY(0);
+        }
+        50% {
+            transform: translateY(-15px); /* مقدار پرش رو بیشتر یا کمتر کن */
+        }
+    }
+    .animate-big-bounce {
+        animation: big-bounce 0.8s infinite;
+    }
 }
 
 @layer components {

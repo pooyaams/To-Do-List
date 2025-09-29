@@ -9,6 +9,8 @@ import {
 } from "./utils/utils.js";
 import {startTimer, stopTimer} from "./timer.js";
 
+const mainContent = document.querySelector('#mainContent');
+const loader = document.querySelector('#loader');
 const exportBtn = document.querySelector('#exportBtn');
 const exportContainer = document.querySelector('#exportContainer');
 const newTodoTitle = document.querySelector('#newTodoTitle');
@@ -24,6 +26,11 @@ const showLessTodosBtn = document.querySelector('#showLessTodos');
 const filterCategory = document.querySelector('#filter-category');
 const filterDifficulty = document.querySelector('#filter-difficulty');
 const filterStatus = document.querySelector('#filter-status');
+
+document.addEventListener('DOMContentLoaded', () => {
+    loader.classList.add('hidden');
+    mainContent.classList.remove('hidden');
+});
 
 let todos = getSavedTodos() || [];
 let difficulty = 1;
